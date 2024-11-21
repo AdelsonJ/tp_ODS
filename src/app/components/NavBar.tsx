@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link";
 
 export default function NavBar() {
     return (
@@ -18,6 +19,9 @@ export default function NavBar() {
                 </div>
                 <button>Login</button>
                 <button>Cadastrar</button>
+                <button>
+                    <Link href="/entidades/local">Local</Link>
+                </button>
             </nav>
         </header>
     )
