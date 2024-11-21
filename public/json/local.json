@@ -36,16 +36,9 @@
     },
     {
         "id": 6,
-        "name": "Bosque Encantado",
-        "address": "Travessa das Árvores, 67",
-        "capacity": 50,
-        "description": "Pequeno espaço com trilhas e mirante natural."
-    },
-    {
-        "id": 7,
-        "name": "Arena do Sol",
-        "address": "Praça das Estrelas, 505",
-        "capacity": 400,
-        "description": "Estrutura moderna para competições esportivas e festivais."
+        "name": "ufsj",
+        "address": "ctan",
+        "capacity": 45,
+        "description": "samfkngdnksnj"
     }
 ]

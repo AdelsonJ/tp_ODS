@@ -12,8 +12,8 @@ export default function CategoriesSection() {
                         <Image
                             className="categoty-img"
                             src={categories.src}
-                            width={125}
-                            height={125}
+                            width={120}
+                            height={120}
                             alt={categories.alt}
                         />
                         <p className="category-label">
