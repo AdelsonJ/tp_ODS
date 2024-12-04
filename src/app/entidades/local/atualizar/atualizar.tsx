@@ -94,50 +94,66 @@ export default function AtualizarForm() {
 
     return (
         <div className={styles.container}>
-            <h1>Atualizar Local</h1>
-            <form onSubmit={handleSubmit}>
-                <div className={styles.field}>
-                    <label>Nome</label>
-                    <input
-                        type="text"
-                        value={nome}
-                        onChange={(e) => setNome(e.target.value)}
-                        placeholder="Nome do local"
-                    />
-                </div>
-                <div className={styles.field}>
-                    <label>Endereço</label>
-                    <input
-                        type="text"
-                        value={endereco}
-                        onChange={(e) => setEndereco(e.target.value)}
-                        placeholder="Endereço do local"
-                    />
-                </div>
-                <div className={styles.field}>
-                    <label>Capacidade</label>
-                    <input
-                        type="number"
-                        value={capacidade}
-                        onChange={(e) => setCapacidade(e.target.value)}
-                        placeholder="Capacidade"
-                    />
-                </div>
-                <div className={styles.field}>
-                    <label>Descrição</label>
-                    <textarea
-                        value={descricao}
-                        onChange={(e) => setDescricao(e.target.value)}
-                        placeholder="Descrição"
-                    />
-                </div>
-                <div className={styles.buttons}>
-                    <button type="submit" className={styles.button}>Salvar</button>
-                    <Link href="/entidades/local">
-                        <button type="button" className={styles.button}>Voltar</button>
-                    </Link>
-                </div>
-            </form>
+            <div className={styles.container_title}>
+                <h1>Atualizar Local</h1>
+            </div>
+
+            <div className={styles.container_add}>
+                <h2>Local</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className={styles.container_info}>
+                        <label>Nome</label>
+                        <div className={styles.container_text}>
+                            <input
+                                type="text"
+                                value={nome}
+                                onChange={(e) => setNome(e.target.value)}
+                                placeholder="Nome do local"
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.field}>
+                        <label>Endereço</label>
+
+                        <div className={styles.container_info}>
+                            <input
+                                type="text"
+                                value={endereco}
+                                onChange={(e) => setEndereco(e.target.value)}
+                                placeholder="Endereço do local"
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.field}>
+                        <label>Capacidade</label>
+
+                        <div className={styles.container_info}>
+                        <input
+                            type="number"
+                            value={capacidade}
+                            onChange={(e) => setCapacidade(e.target.value)}
+                            placeholder="Capacidade"
+                        />
+                        </div>
+                    </div>
+                    <div className={styles.container_descricao}>
+                        <label>Descrição</label>
+                        <div className={styles.container_text}>
+                            <textarea
+                                value={descricao}
+                                onChange={(e) => setDescricao(e.target.value)}
+                                placeholder="Descrição"
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.buttons}>
+                        <button type="submit" className={styles.button}>Salvar</button>
+                        <Link href="/entidades/local">
+                            <button type="button" className={styles.button}>Voltar</button>
+                        </Link>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }
