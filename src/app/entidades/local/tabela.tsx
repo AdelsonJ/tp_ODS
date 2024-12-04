@@ -5,10 +5,10 @@ import styles from "./local.module.css";
 
 interface Local {
     id: number;
-    name: string;
-    address: string;
-    capacity: number;
-    description: string;
+    nome: string;
+    endereco: string;
+    capacidade: number;
+    descricao: string;
 }
 
 export default function DataTable() {
@@ -19,11 +19,14 @@ export default function DataTable() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch('http://localhost:5001/local');
+                // Alterar para a rota correta da API do Next.js
+                const response = await fetch('/api/local');
                 if (!response.ok) {
                     throw new Error(`Erro na resposta: ${response.statusText}`);
                 }
                 const result: Local[] = await response.json();
+                
+                console.log(result);  // Verifique os dados recebidos aqu
                 setData(result);
             } catch (error) {
                 if (error instanceof Error) {
@@ -49,7 +52,7 @@ export default function DataTable() {
 
     return (
         <div className={styles.tableContainer}>
-            <h2>Lista de Locals</h2>
+            <h2>Lista de Locais</h2>
             <table className={styles.table}>
                 <thead>
                     <tr>
@@ -64,10 +67,10 @@ export default function DataTable() {
                     {data.map((item) => (
                         <tr key={item.id}>
                             <td>{item.id}</td>
-                            <td>{item.name}</td>
-                            <td>{item.address}</td>
-                            <td>{item.capacity}</td>
-                            <td>{item.description}</td>
+                            <td>{item.nome}</td>
+                            <td>{item.endereco}</td>
+                            <td>{item.capacidade}</td>
+                            <td>{item.descricao}</td>
                         </tr>
                     ))}
                 </tbody>

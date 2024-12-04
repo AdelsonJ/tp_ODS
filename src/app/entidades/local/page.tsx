@@ -5,22 +5,22 @@ import styles from "./local.module.css";
 
 export default function Local() {
 
-  return (
-    <>
-      <div className={styles.container}>
-        <DataTable />
-      </div>
-      <div className={styles.button_container}>
-        <Link href="/entidades/local/cadastro" passHref>
-            <button className={styles.button}>Cadastrar</button>
-        </Link>
-        <Link href="/entidades/local/atualizar" passHref>
-          <button className={styles.button}>Atualizar</button>
-        </Link>
-        <Link href="/entidades/local/excluir" passHref>
-          <button className={styles.button}>Excluir</button>
-        </Link>
-      </div>
-    </>
-  );
+    return (
+        <>
+        <div className={styles.container}>
+            <DataTable />
+        </div>
+        <div className={styles.button_container}>
+            <Link href="/entidades/local/cadastro" passHref>
+                <button className={styles.button}>Cadastrar</button>
+            </Link>
+            <Link href="/entidades/local/atualizar" passHref>
+            <button className={styles.button}>Atualizar</button>
+            </Link>
+            <Link href="/entidades/local/excluir" passHref>
+            <button className={styles.button}>Excluir</button>
+            </Link>
+        </div>
+        </>
+    );
 }
