@@ -48,7 +48,7 @@ export default function DataTable() {
 
     return (
         <div className={styles.tableContainer}>
-            <h2>Lista de Locals</h2>
+            <h2>Lista de Serviços</h2>
             <table className={styles.table}>
                 <thead>
                     <tr>

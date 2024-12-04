@@ -4,7 +4,7 @@ import DataTable from "./tabela";
 import styles from "./servico.module.css"; 
 import NavBar from "../components/Header";
 
-export default function Local() {
+export default function Servico() {
 
   return (
     <>

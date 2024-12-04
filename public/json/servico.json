@@ -4,5 +4,11 @@
         "name": "serviço",
         "category": "categoria",
         "description": "description irada"
+    },
+    {
+        "id": 4,
+        "name": "carpir lote",
+        "category": "braçal",
+        "description": "lotes serão carpidos"
     }
 ]
