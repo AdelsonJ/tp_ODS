@@ -112,10 +112,10 @@ export default function AtualizarForm() {
                             />
                         </div>
                     </div>
-                    <div className={styles.field}>
+                    <div className={styles.container_info}>
                         <label>Endereço</label>
 
-                        <div className={styles.container_info}>
+                        <div className={styles.container_text}>
                             <input
                                 type="text"
                                 value={endereco}
@@ -124,10 +124,10 @@ export default function AtualizarForm() {
                             />
                         </div>
                     </div>
-                    <div className={styles.field}>
+                    <div className={styles.container_info}>
                         <label>Capacidade</label>
 
-                        <div className={styles.container_info}>
+                        <div className={styles.container_text}>
                         <input
                             type="number"
                             value={capacidade}
@@ -146,7 +146,7 @@ export default function AtualizarForm() {
                             />
                         </div>
                     </div>
-                    <div className={styles.buttons}>
+                    <div className={styles.button_container}>
                         <button type="submit" className={styles.button}>Salvar</button>
                         <Link href="/entidades/local">
                             <button type="button" className={styles.button}>Voltar</button>

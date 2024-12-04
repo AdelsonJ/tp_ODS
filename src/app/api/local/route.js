@@ -53,3 +53,36 @@ export async function DELETE(req) {
   }
 }
 
+export async function PUT(req) {
+  try {
+    // Parse a requisição para extrair os dados do corpo
+    const { id, nome, endereco, capacidade, descricao } = await req.json();
+
+    // Verifique se o ID foi fornecido
+    if (!id) {
+      return new Response(JSON.stringify({ error: "ID é obrigatório" }), { status: 400 });
+    }
+
+    // Atualize o registro no banco de dados
+    const localAtualizado = await prisma.local.update({
+      where: { id },
+      data: {
+        nome,
+        endereco,
+        capacidade,
+        descricao,
+      },
+    });
+
+    return new Response(
+      JSON.stringify({ message: "Local atualizado com sucesso", local: localAtualizado }),
+      { status: 200 }
+    );
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ error: "Erro ao atualizar local", message: error.message }),
+      { status: 500 }
+    );
+  }
+}
+
