@@ -49,7 +49,7 @@ export default function NavBar() {
                         Eventos
                     </button>
                 </Link>
-                <Link href="#">
+                <Link href="/servico">
                     <button>
                         <BiSolidDrink className="menu-icon" />
                         Serviços

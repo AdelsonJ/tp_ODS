@@ -103,7 +103,97 @@ app.delete('/deleteLocal', (req, res) => {
     });
 });
 
+// Endpoint para obter e salvar servico
+app.get('/servico', (req, res) => {
+    const filePath = path.join(__dirname, '../../public/json/servico.json');
 
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Erro ao ler o arquivo JSON');
+        }
+        res.send(data);
+    });
+});
+
+app.post('/saveServico', (req, res) => {
+    console.log("Requisição POST recebida!")
+
+    const newServico = req.body;
+    const filePath = path.join(__dirname, '../../public/json/servico.json');
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Erro ao ler o arquivo JSON' });
+        }
+
+        let jsonData = [];
+        if (data) {
+            try {
+                jsonData = JSON.parse(data);
+            } catch (parseErr) {
+                console.error(parseErr);
+                return res.status(500).json({ error: 'Erro ao processar o arquivo JSON' });
+            }
+        }
+
+        // Encontrar o próximo id
+        const ids = jsonData.map(servico => servico.id); // Pega todos os ids existentes
+        const nextId = ids.length > 0 ? Math.max(...ids) + 1 : 1; // Se não houver ids, começa com 1, caso contrário, pega o próximo id
+        
+        // Atualiza o novo servico com o id correto
+        const servicoComId = {
+            ...newServico,
+            id: nextId,
+        };
+
+        jsonData.push(servicoComId); // Adiciona o novo local com id
+
+        fs.writeFile(filePath, JSON.stringify(jsonData, null, 4), 'utf8', (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ error: 'Erro ao salvar o arquivo JSON' });
+            }
+            console.log("Serviço salvo com sucesso!");
+            res.json({ message: 'Dados do serviço salvos com sucesso' });
+        });
+    })
+})
+
+app.delete('/deleteServico', (req, res) => {
+    const { ids } = req.body;
+    const filePath = path.join(__dirname, '../../public/json/servico.json');
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Erro ao ler o arquivo JSON' });
+        }
+
+        let jsonData = [];
+        if (data) {
+            try {
+                jsonData = JSON.parse(data);
+            } catch (parseErr) {
+                console.error(parseErr);
+                return res.status(500).json({ error: 'Erro ao processar o arquivo JSON' });
+            }
+        }
+
+        // Filtra os servicos que não estão na lista de IDs selecionados
+        const updatedData = jsonData.filter((servico) => !ids.includes(servico.id));
+
+        // Salva o novo arquivo JSON com os servicos restantes
+        fs.writeFile(filePath, JSON.stringify(updatedData, null, 4), 'utf8', (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ error: 'Erro ao salvar o arquivo JSON' });
+            }
+            console.log("Serviços excluídos com sucesso!");
+            res.json({ message: 'Serviços excluídos com sucesso' });
+        });
+    });
+});
 
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);

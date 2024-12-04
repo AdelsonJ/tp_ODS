@@ -1,0 +1,95 @@
+
+.container {
+    margin: 0 auto;
+}
+
+/* Estilo geral para o container da tabela */
+.tableContainer {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 90%;
+    border-radius: 8px;
+    /* background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+/* Título da tabela */
+.tableContainer h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Estilo da tabela */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabeçalhos da tabela */
+.table th {
+    padding: 12px;
+    background-color: blue;
+    color: #fff;
+    font-weight: bold;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Linhas da tabela */
+.table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Linhas alternadas */
+.table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover para as linhas da tabela */
+.table tr:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+/* Adiciona borda no final da tabela */
+.table tfoot td {
+    padding: 12px;
+    text-align: left;
+    background-color: #f2f2f2;
+    border-top: 2px solid #ddd;
+}
+
+.button_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; 
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+}
+
+.button {
+    background-color: blue; /* Cor de fundo do botão */
+    color: #fff; /* Cor do texto do botão */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+.button:hover {
+    background-color: lightseagreen; /* Cor do botão ao passar o mouse */
+}
+
