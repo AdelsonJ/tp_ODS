@@ -2,21 +2,19 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function main() {
-  // Dados de um único local
-  const local = {
-    nome: 'Local A',
+  // Dados de um único servico
+  const servico = {
+    nome: 'Servico A',
     categoria: 'Esporte',
-    descricao: 'Local para eventos esportivos',
-    capacidade: 500,
-    endereco: 'Rua das Flores, 123',
+    descricao: 'Servico para eventos esportivos',
   };
 
-  // Inserindo o único local
-  const createdLocal = await prisma.local.create({
-    data: local,
+  // Inserindo o único servico
+  const createdServico = await prisma.servico.create({
+    data: servico,
   });
 
-  console.log('Local criado:', createdLocal);
+  console.log('Servico criado:', createdServico);
 }
 
 main()

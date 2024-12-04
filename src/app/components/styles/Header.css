@@ -1,0 +1,168 @@
+.main-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--blue-header);
+    padding: 20px 40px;
+}
+
+/* Estilo do menu hamburguer */
+.hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.hamburger-menu span {
+    height: 4px;
+    background: var(--white-elements);
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* Estilo do menu lateral */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -400px; /* Largura ajustada */
+    width: 400px; /* Aumentada de 250px para 300px */
+    height: 100%;
+    background: #f9f9f9;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    transition: 0.3s ease-in-out;
+    padding: 20px;
+    z-index: 999; 
+}
+
+
+
+.side-menu.open {
+    left: 0;
+}
+
+.side-menu .close-button {
+    font-size: 34px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.side-menu button:hover {
+    color: #007bff;
+}
+
+.side-menu .menu-icon {
+    font-size: 30px; /* Aumentada de 20px para 22px */
+    margin-right: 12px; /* Ajuste no espaçamento */
+    color: inherit;
+}
+
+/* Botões de login e cadastro */
+.side-menu button {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    font-size: 26px; /* Aumentada de 18px para 20px */
+    font-weight: bold;
+    color: #333;
+    padding: 12px 0; /* Ajuste do espaçamento */
+    cursor: pointer;
+    transition: color 0.3s;
+    text-align: left;
+    width: 100%;
+}
+
+.buttons button {
+    background: var(--blue-header);
+    color: #fff; /* Texto branco */
+    border: 2px solid #fff; /* Borda branca */
+    padding: 10px 20px;
+    font-size: 1rem; /* Tamanho da fonte */
+    border-radius: 8px; /* Bordas arredondadas */
+    transition: all 0.3s ease; /* Suave ao passar o mouse */
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.buttons button:hover {
+    background-color: #351c90; /* Fundo roxo escuro no hover */
+    transform: scale(1.05); /* Leve aumento */
+}
+
+/* Barra de pesquisa */
+.search-bar {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    transition: all 0.3s ease;
+    background-color: #fff;
+    color: #333;
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: var(--blue-header);
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+}
+
+.search-bar::placeholder {
+    color: #888;
+    font-style: italic;
+}
+
+/* Logo */
+.logo-img img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Se necessário */
+}
+
+/* Ajuste da segunda barra de pesquisa */
+.search-bar-locals input {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+    transition: all 0.3s ease;
+    background-color: #fff;
+    color: #333;
+}
+
+.search-bar-locals input:focus {
+    outline: none;
+    border-color: var(--blue-header);
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+}
+
+.search-bar-locals input::placeholder {
+    color: #888;
+    font-style: italic;
+}
+
+/* Overlay para efeito blur */
+.page-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Cor com transparência */
+    backdrop-filter: blur(5px); /* Efeito de desfoque */
+    z-index: 998; /* Abaixo do menu lateral */
+    display: none; /* Invisível por padrão */
+    transition: opacity 0.3s ease-in-out;
+}
+
+.page-overlay.active {
+    display: block; /* Torna visível quando ativo */
+}

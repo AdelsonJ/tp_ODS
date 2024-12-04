@@ -6,7 +6,7 @@ import AtualizarForm from "./atualizar";
 import { useSearchParams } from "next/navigation";
 import NavBar from "../../../components/Header";
 
-export default function LocalAtualizar() {
+export default function ServicoAtualizar() {
     const searchParams = useSearchParams();
     const view = searchParams.get("view");
 

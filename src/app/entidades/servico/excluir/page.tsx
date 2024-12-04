@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import DataTable from "./tabela"; 
-import styles from "../local.module.css"; 
+import styles from "../servico.module.css"; 
 import NavBar from "../../../components/Header";
 
-export default function LocalExcluir() {
+export default function servicoExcluir() {
 
     return (
         <>

@@ -1,9 +1,44 @@
 [
     {
-        "id": 8,
-        "name": "Chacara Verde",
-        "address": "Rua dos Bobos, n 0, Segredo",
+        "id": 1,
+        "name": "Jardim Central",
+        "address": "Rua das Flores, 123",
+        "capacity": 100,
+        "description": "Espaço agradável com áreas verdes e playground."
+    },
+    {
+        "id": 2,
+        "name": "Praça do Lago",
+        "address": "Avenida Beira Lago, 456",
+        "capacity": 75,
+        "description": "Perfeito para caminhadas e atividades ao ar livre."
+    },
+    {
+        "id": 3,
+        "name": "Centro Cultural Horizonte",
+        "address": "Rua dos Artistas, 789",
+        "capacity": 200,
+        "description": "Lugar para eventos culturais e exposições."
+    },
+    {
+        "id": 4,
+        "name": "Parque das Palmeiras",
+        "address": "Alameda do Sol, 101",
         "capacity": 150,
-        "description": "Lugar aconchegante"
+        "description": "Um ótimo local para piqueniques e confraternizações."
+    },
+    {
+        "id": 5,
+        "name": "Esplanada do Horizonte",
+        "address": "Estrada Nova, 202",
+        "capacity": 300,
+        "description": "Local ideal para grandes eventos e shows ao ar livre."
+    },
+    {
+        "id": 6,
+        "name": "ufsj",
+        "address": "ctan",
+        "capacity": 45,
+        "description": "samfkngdnksnj"
     }
 ]

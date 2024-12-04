@@ -1,0 +1,66 @@
+.create-event-section {
+  background: linear-gradient(135deg, #6747dd, #5035ba);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px;
+  border-radius: 25px;
+  color: #fff;
+  height: 100%;
+  gap: 80px; 
+  min-height: 300px; 
+}
+
+.text-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1; 
+  max-width: 50%; 
+  text-align: left;
+  gap: 15px;
+}
+
+.text-section h3 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.text-section h4 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.text-section p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.text-section .event-button {
+  background-color: #fff;
+  width: 200px;
+  color: #6747dd;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.text-section .event-button:hover {
+  transform: scale(1.05);
+}
+
+.create-event-section img {
+  flex: 1; 
+  max-width: 50%; 
+  height: auto; 
+  display: block;
+  margin: 0 auto;
+}
+  

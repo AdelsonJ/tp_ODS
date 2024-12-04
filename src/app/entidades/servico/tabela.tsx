@@ -1,30 +1,30 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "./local.module.css";
+import styles from "./servico.module.css"; 
 
-interface Local {
+interface Servico {
     id: number;
     nome: string;
-    endereco: string;
-    capacidade: number;
+    categoria: string;
     descricao: string;
 }
 
 export default function DataTable() {
-    const [data, setData] = useState<Local[]>([]);
-    const [searchTerm, setSearchTerm] = useState(""); // Estado para o valor da barra de pesquisa
+    const [data, setData] = useState<Servico[]>([]);
+    const [searchTerm, setSearchTerm] = useState("");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch('/api/local');
+                const response = await fetch('/api/servico');
+                
                 if (!response.ok) {
                     throw new Error(`Erro na resposta: ${response.statusText}`);
                 }
-                const result: Local[] = await response.json();
+                const result: Servico[] = await response.json();
                 setData(result);
             } catch (error) {
                 if (error instanceof Error) {
@@ -40,7 +40,6 @@ export default function DataTable() {
         fetchData();
     }, []);
 
-    // Função para filtrar os dados com base no valor da barra de pesquisa
     const filteredData = data.filter(item => 
         item.nome.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -55,8 +54,8 @@ export default function DataTable() {
 
     return (
         <div className={styles.tableContainer}>
-            <h2>Lista de Locais</h2>
-            
+            <h2>Lista de Serviços</h2>
+
             <div className={styles.containerBarraPesquisa}>
                 {/* Barra de pesquisa */}
                 <input
@@ -67,15 +66,14 @@ export default function DataTable() {
                     className={styles.searchBar}
                 />
             </div>
-
+            
             <table className={styles.table}>
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nome</th>
-                        <th>Endereço</th>
-                        <th>Capacidade</th>
-                        <th>Descrição</th>
+                        <th>Categoria</th>
+                        <th>Descrição</th>  
                     </tr>
                 </thead>
                 <tbody>
@@ -83,8 +81,7 @@ export default function DataTable() {
                         <tr key={item.id}>
                             <td>{item.id}</td>
                             <td>{item.nome}</td>
-                            <td>{item.endereco}</td>
-                            <td>{item.capacidade}</td>
+                            <td>{item.categoria}</td>
                             <td>{item.descricao}</td>
                         </tr>
                     ))}

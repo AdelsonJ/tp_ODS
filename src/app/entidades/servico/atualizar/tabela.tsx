@@ -1,26 +1,26 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "./local.module.css";
+import styles from "../servico.module.css"; 
+import Link from "next/link";
 
 interface Local {
     id: number;
     nome: string;
-    endereco: string;
-    capacidade: number;
+    categoria: string;
     descricao: string;
 }
 
 export default function DataTable() {
     const [data, setData] = useState<Local[]>([]);
-    const [searchTerm, setSearchTerm] = useState(""); // Estado para o valor da barra de pesquisa
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [selectedId, setSelectedId] = useState<number | null>(null); // Apenas um ID selecionado
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch('/api/local');
+                const response = await fetch('/api/servico');
                 if (!response.ok) {
                     throw new Error(`Erro na resposta: ${response.statusText}`);
                 }
@@ -40,10 +40,10 @@ export default function DataTable() {
         fetchData();
     }, []);
 
-    // Função para filtrar os dados com base no valor da barra de pesquisa
-    const filteredData = data.filter(item => 
-        item.nome.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    // Função para lidar com a seleção de um checkbox
+    const handleSelect = (id: number) => {
+        setSelectedId((prevSelectedId) => (prevSelectedId === id ? null : id)); // Alterna entre selecionar e deselecionar
+    };
 
     if (loading) {
         return <p>Carregando...</p>;
@@ -55,41 +55,44 @@ export default function DataTable() {
 
     return (
         <div className={styles.tableContainer}>
-            <h2>Lista de Locais</h2>
-            
-            <div className={styles.containerBarraPesquisa}>
-                {/* Barra de pesquisa */}
-                <input
-                    type="text"
-                    placeholder="Pesquisar pelo nome"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className={styles.searchBar}
-                />
-            </div>
-
+            <h2>Selecione um Local para atualizar</h2>
             <table className={styles.table}>
                 <thead>
                     <tr>
+                        <th></th>
                         <th>ID</th>
                         <th>Nome</th>
-                        <th>Endereço</th>
-                        <th>Capacidade</th>
+                        <th>Categoria</th>
                         <th>Descrição</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredData.map((item) => (
+                    {data.map((item) => (
                         <tr key={item.id}>
+                            <td>
+                                <input
+                                    type="radio" // Alterado para rádio
+                                    checked={selectedId === item.id} // Verifica se é o selecionado
+                                    onChange={() => handleSelect(item.id)}
+                                />
+                            </td>
                             <td>{item.id}</td>
                             <td>{item.nome}</td>
-                            <td>{item.endereco}</td>
-                            <td>{item.capacidade}</td>
+                            <td>{item.categoria}</td>
                             <td>{item.descricao}</td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            <div className={styles.button_container}>
+                <Link href={`/entidades/servico/atualizar?view=atualizar&id=${selectedId}`} passHref>
+                    <button className={styles.button} disabled={!selectedId}>Continuar</button>
+                </Link>
+
+                <Link href="/entidades/servico" passHref>
+                    <button className={styles.button}>Voltar</button>
+                </Link>
+            </div>
         </div>
     );
 }
