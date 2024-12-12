@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import styles from "./atualizar.module.css";
+import styles from "../cadastro/cadastro.module.css";
 import Link from "next/link";
 
 export default function AtualizarForm() {

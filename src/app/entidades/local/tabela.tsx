@@ -13,7 +13,7 @@ interface Local {
 
 export default function DataTable() {
     const [data, setData] = useState<Local[]>([]);
-    const [searchTerm, setSearchTerm] = useState(""); // Estado para o valor da barra de pesquisa
+    const [searchTerm, setSearchTerm] = useState(""); 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 

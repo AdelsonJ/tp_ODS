@@ -43,7 +43,7 @@ export default function NavBar() {
                         Locais
                     </button>
                 </Link>
-                <Link href="/eventos">
+                <Link href="/entidades/cadastro">
                     <button>
                         <FaCalendarAlt className="menu-icon" />
                         Eventos
@@ -75,8 +75,13 @@ export default function NavBar() {
             </div>
 
             <div className="buttons">
-                <button>Login</button>
-                <button>Cadastre-se</button>
+                <Link href="/entidades/login">
+                    <button>Login</button>
+                </Link>
+
+                <Link href="/entidades/cadastro">
+                    <button>Cadastre-se</button>
+                </Link>
             </div>
         </header>
         </>

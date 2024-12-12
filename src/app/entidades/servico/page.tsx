@@ -8,7 +8,6 @@ export default function Servico() {
 
   return (
     <>
-      <NavBar />
       <div className={styles.container}>
         <DataTable />
       </div>
