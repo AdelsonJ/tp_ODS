@@ -79,8 +79,16 @@
     width: 100%;
 }
 
-.buttons button {
+
+.container_buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
     background: var(--blue-header);
+}
+
+.buttons {
     color: #fff; /* Texto branco */
     border: 2px solid #fff; /* Borda branca */
     padding: 10px 20px;
@@ -89,9 +97,9 @@
     transition: all 0.3s ease; /* Suave ao passar o mouse */
     cursor: pointer;
     margin: 0 10px;
+    background: var(--blue-header);
 }
-
-.buttons button:hover {
+.buttons:hover {
     background-color: #351c90; /* Fundo roxo escuro no hover */
     transform: scale(1.05); /* Leve aumento */
 }

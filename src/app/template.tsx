@@ -1,7 +1,6 @@
 "use client";
-import Link from "next/link";
 import NavBar from "./components/Header";
-import styles from "./page.module.css";
+import { UserProvider } from "./components/UserContext";
 
 export default function Template({
     children,
@@ -9,17 +8,19 @@ export default function Template({
     children: React.ReactNode,
 }) {
     return (
-        <main>
-            <header>
-                <NavBar />
-            </header>
+        <UserProvider>
+            <main>
+                <header>
+                    <NavBar />
+                </header>
 
-            <div>
-                {children}
-            </div>
+                <div>
+                    {children}
+                </div>
 
-            <footer>
-            </footer>
-        </main>
+                <footer>
+                </footer>
+            </main>
+        </UserProvider>
     );
 }
