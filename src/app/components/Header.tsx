@@ -67,6 +67,11 @@ export default function NavBar() {
                 Serviços
                 </button>
             </Link>
+            <Link href="/entidades/categoria">
+                <button>
+                Categorias
+                </button>
+            </Link>
             </div>
 
             <div>

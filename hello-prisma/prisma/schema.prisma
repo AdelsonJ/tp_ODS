@@ -74,4 +74,10 @@ model Servico{
   eventos    Evento[]
 }
 
+model Categoria{
+  id         Int @id @default(autoincrement())
+  nome       String
+  descricao  String
+}
+
 
