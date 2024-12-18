@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 export async function GET(req) {
   try {
     const categorias = await prisma.categoria.findMany();
-    return new Response(JSON.stringify(), { status: 200 });
+    return new Response(JSON.stringify(categorias), { status: 200 });
   } catch (error) {
     return new Response(JSON.stringify({ error: 'Erro ao buscar categorias' }), { status: 500 });
   }
@@ -17,7 +17,7 @@ export async function POST(req) {
   try {
     const { nome,  descricao } = await req.json();
 
-    const novoServico = await prisma.servico.create({
+    const novaCategoria = await prisma.categoria.create({
       data: {
         nome,
         descricao,

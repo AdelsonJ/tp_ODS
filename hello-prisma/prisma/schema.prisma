@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,70 +8,66 @@ datasource db {
 }
 
 model Usuario {
-  username    String   @id @unique
-  nome        String
-  email       String @unique
-  senha       String
-  tipo        String
-  data_nasc   String
-  idade       Int
-  inscricoes  Inscricao[]
-  eventos     Evento[]
+  username   String      @id @unique
+  nome       String
+  email      String      @unique
+  senha      String
+  tipo       String
+  data_nasc  String
+  idade      Int
+  eventos    Evento[]
+  inscricoes Inscricao[]
 }
 
-
 model Inscricao {
-  id           Int  @id @default(autoincrement())
-  data         String
-  hora         String
-  user         Usuario @relation(fields: [user_author], references: [username])
-  user_author  String
-  evento       Evento @relation(fields: [id_evento], references: [id])
-  id_evento    Int
+  id          Int     @id @default(autoincrement())
+  data        String
+  hora        String
+  user_author String
+  id_evento   Int
+  evento      Evento  @relation(fields: [id_evento], references: [id])
+  user        Usuario @relation(fields: [user_author], references: [username])
 }
 
 model Evento {
-  id                Int       @id @default(autoincrement())
-  nome              String
-  data              String
-  hora              String
-  categoria         String
-  class_indicativa  Int
-  descricao         String
-  capacidade        Int
-  duracao           Int
-  user              Usuario   @relation(fields: [user_author], references: [username])
-  user_author       String
-  local             Local     @relation(fields: [id_local], references: [id])
-  id_local          Int
-  servico           Servico   @relation(fields: [id_servico], references: [id])
-  id_servico        Int
-  inscricoes        Inscricao[]
+  id               Int         @id @default(autoincrement())
+  nome             String
+  data             String
+  hora             String
+  categoria        String
+  class_indicativa Int
+  descricao        String
+  capacidade       Int
+  duracao          Int
+  user_author      String
+  id_local         Int
+  id_servico       Int
+  local            Local       @relation(fields: [id_local], references: [id])
+  servico          Servico     @relation(fields: [id_servico], references: [id])
+  user             Usuario     @relation(fields: [user_author], references: [username])
+  inscricoes       Inscricao[]
 }
 
-
-model Local{
-  id          Int  @id @default(autoincrement())
-  nome        String
-  categoria   String?
-  descricao   String
-  capacidade  Int
-  endereco    String
-  eventos     Evento[]
-}
-
-model Servico{
-  id         Int  @id @default(autoincrement())
+model Local {
+  id         Int      @id @default(autoincrement())
   nome       String
-  categoria  String
+  categoria  String?
   descricao  String
+  capacidade Int
+  endereco   String
   eventos    Evento[]
 }
 
-model Categoria{
-  id         Int @id @default(autoincrement())
-  nome       String
-  descricao  String
+model Servico {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  categoria String
+  descricao String
+  eventos   Evento[]
 }
 
-
+model Categoria {
+  id        Int    @id @default(autoincrement())
+  nome      String
+  descricao String
+}

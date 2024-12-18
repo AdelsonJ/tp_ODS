@@ -27,6 +27,7 @@ export default function DataTable() {
                 setData(result);
             } catch (error) {
                 if (error instanceof Error) {
+                    console.log(error.message)
                     setError(error.message);
                 } else {
                     setError("Erro desconhecido");
