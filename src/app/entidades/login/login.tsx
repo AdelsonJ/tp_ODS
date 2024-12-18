@@ -15,9 +15,12 @@ export default function Login({ isOpen, onClose, children }: ModalProps) {
     return (
         <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>
-                <button className={styles.close_button} onClick={onClose}>
+                {/* <button className={styles.close_button} onClick={onClose}>
                     <h3>X</h3>
-                </button>
+                </button> */}
+                <button onClick={onClose}>
+                    <h3>X</h3>
+                </button> 
                 {children}
             </div>
         </div>

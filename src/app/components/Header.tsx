@@ -67,6 +67,12 @@ export default function NavBar() {
                 Serviços
                 </button>
             </Link>
+            <Link href="/dashboard">
+                <button>
+                <IoMdHome className="menu-icon" />
+                Dashboard
+                </button>
+            </Link>
             </div>
 
             <div>

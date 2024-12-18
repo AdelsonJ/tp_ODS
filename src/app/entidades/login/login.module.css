@@ -16,6 +16,14 @@
     width: 100%;
     position: relative;
 }
+.modalContent h3{
+    color: black;
+    font-family: var(--font_main);
+    font-size: 2rem;
+    position: absolute;
+    top: 7.5%;
+    right: 7.5%;
+}
 
 
 .container{
