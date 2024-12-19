@@ -1,0 +1,212 @@
+.modalOverlay {
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+}
+
+.modalContent h3{
+    color: black;
+    font-family: var(--font_main);
+    font-size: 2rem;
+    position: absolute;
+    top: 7.5%;
+    right: 0.01%;
+}
+
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    height: 75vh;
+    width: 30rem;
+    border-radius: 6%;
+    border:2px solid black;
+    overflow: hidden;
+    background-color: white;
+}
+
+.close_button {
+    height: 3rem;
+    width: 3rem;
+    position: absolute;
+    top: 10px; /* Ajuste a posição vertical */
+    right: 10px; /* Ajuste a posição horizontal */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    cursor: pointer; 
+    border: none;
+    background-color: transparent; /* Evita interferência visual */
+    z-index: 10; /* Certifique-se de que está acima do conteúdo */
+}
+
+.close_button h3 {
+    color: black;
+    font-family: var(--font_main);
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.container_title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75%;
+    width: 100%;
+    margin-top: 2rem; /* Adicione margem superior, se necessário */
+    position: relative; /* Garante o alinhamento correto */
+}
+
+.container_title h2 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.container_info{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 60%;
+    width: 80%;
+    gap: 1rem;
+}
+.container_info label {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    gap: 1rem;
+}
+
+.container_data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 3.5rem;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    position: relative;
+}
+.container_data::before {
+    content: attr(data-label);
+    position: absolute;
+    top: 50%; 
+    left: 10px;
+    transform: translateY(-50%);
+    background-color: white;
+    padding: 0 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.5); 
+    transition: all 0.2s ease;
+}
+.container_data.input-filled::before {
+    top: -12px; 
+    transform: translateY(0);
+    color: rgba(0, 0, 0, 1); 
+}
+.container_data input {
+    width: 98%;
+    height: 98%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+
+.container_button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 3rem;
+}
+
+.button{
+    background-color: var(--blue-header);
+    color: #fff; 
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+.button:hover {
+    background-color: lightseagreen; 
+}
+
+
+.container_footer {
+    background-color: var(--blue-header);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15%; /* Altura reduzida */
+    width: 100%;
+}
+.container_footer p{
+    color: white;
+}
+.container_footer button{
+    width: auto;
+    background-color: var(--blue-header);
+    color: white; 
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin: 1px;
+    padding: 4px;
+}
+.container_footer button:hover {
+    background-color: var(--blue-header);
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modalOverlay.active {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  .modalOverlay:not(.active) {
+    visibility: hidden;
+    opacity: 0;
+  }
+  

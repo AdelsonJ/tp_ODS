@@ -1,0 +1,32 @@
+/* layout.css */
+
+.layout-container {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.layout-container-md {
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.layout-sidenav {
+    width: 100%;
+    flex: none;
+}
+
+.layout-sidenav-md {
+    width: 16rem; /* 64 */
+}
+
+.layout-content {
+    flex-grow: 1;
+    padding: 1.5rem; /* 6 */
+}
+
+.layout-content-md {
+    /* padding: 3rem; */
+    overflow-y: auto;
+}
+  
