@@ -80,7 +80,7 @@ export async function DELETE(req) {
       const { username } = await req.json();
 
       if (!username || !Array.isArray(username)) {
-          return new Response(JSON.stringify({ error: "IDs inválidos" }), { status: 400 });
+          return new Response(JSON.stringify({ error: "Usuarios inválidos" }), { status: 400 });
       }
 
       await prisma.usuario.deleteMany({
@@ -97,12 +97,12 @@ export async function DELETE(req) {
 
 export async function PUT(req) {
   try {
-    const { id, nome, data_nasc, email, username, senha } = await req.json();
+    const { nome, data_nasc, email, username, senha } = await req.json();
 
     // Verifique se o ID foi fornecido
-    if (!id) {
+    if (!username) {
       return new Response(
-        JSON.stringify({ error: "ID é obrigatório" }),
+        JSON.stringify({ error: "Usuario é obrigatório" }),
         { status: 400 }
       );
     }

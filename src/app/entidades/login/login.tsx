@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ReactNode } from "react";
-import styles from "./login.module.css";
+import styles from "./log.module.css";
 
 interface ModalProps {
     isOpen: boolean;
@@ -13,13 +13,6 @@ export default function Login({ isOpen, onClose, children }: ModalProps) {
     if (!isOpen) return null; 
 
     return (
-        <div className={styles.modalOverlay}>
-            <div className={styles.modalContent}>
-                <button className={styles.close_button} onClick={onClose}>
-                    <h3>X</h3>
-                </button>
-                {children}
-            </div>
-        </div>
+        <div className={styles.modalOverlay}>{children}</div>
     );
 }

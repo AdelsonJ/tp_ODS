@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ReactNode } from "react";
-import styles from "./cadastro.module.css";
+import styles from "./cadas.module.css";
 
 interface ModalProps {
     isOpen: boolean;
@@ -14,12 +14,12 @@ export default function Cadastro({ isOpen, onClose, children }: ModalProps) {
 
     return (
         <div className={styles.modalOverlay}>
-            <div className={styles.modalContent}>
+            {/* <div className={styles.modalContent}>
                 <button className={styles.close_button} onClick={onClose}>
                     <h3>X</h3>
                 </button>
+            </div> */}
                 {children}
-            </div>
         </div>
     );
 }
