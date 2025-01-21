@@ -15,6 +15,7 @@ export default function AtualizarForm() {
     const [idServico, setIdServico] = useState("");
     const [user_author, setUser_author] = useState("");
     const [idLocal, setIdLocal] = useState("");
+    const [imagem, setImagem] = useState("");
     const [loading, setLoading] = useState(true);
 
     const [categorias, setCategorias] = useState([]);
@@ -73,6 +74,7 @@ export default function AtualizarForm() {
                 setIdServico(evento.id_servico);
                 setIdLocal(evento.id_local);
                 setUser_author(evento.user_author);
+                setImagem(evento.imagem)
 
             } catch (error) {
                 console.error("Erro ao carregar o evento:", error);
@@ -100,6 +102,7 @@ export default function AtualizarForm() {
           user_author,
           id_local: Number(idLocal),
           id_servico: Number(idServico),
+          imagem,
         };
 
         try {
@@ -248,6 +251,22 @@ export default function AtualizarForm() {
                         ))}
                         </select>
                     </div>
+                </div>
+
+                <div className={styles.container_info}>
+                    <p>Imagem</p>
+                    <div className={styles.container_text}>
+                        <input
+                            type="text"
+                            value={imagem}
+                            onChange={(e) => setImagem(e.target.value)}
+                            placeholder="URL da imagem do evento (opcional)"
+                        />
+                    </div>
+                </div>
+                
+                <div className={styles.container_image}>
+                    <img src={imagem}></img>
                 </div>
 
                 <div className={styles.container_info}>

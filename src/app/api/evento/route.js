@@ -2,6 +2,9 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+const DEFAULT_IMAGE = "/uploads/foto4.png";
+
+
 // Para a rota GET
 export async function GET(req) {
   try {
@@ -26,12 +29,15 @@ export async function POST(req) {
       user_author,
       id_local,
       id_servico,
+      imagem,
     } = await req.json();
 
     // Verifique se todos os dados necessários foram fornecidos
     if (!nome || !data || !hora || !descricao || !capacidade || !duracao || !id_categoria || !user_author || !id_local || !id_servico) {
       return new Response(JSON.stringify({ error: "Preencha todos os campos obrigatórios" }), { status: 400 });
     }
+
+    const imagemFinal = imagem || DEFAULT_IMAGE;
 
     const novoEvento = await prisma.evento.create({
       data: {
@@ -45,6 +51,7 @@ export async function POST(req) {
         user_author,
         id_local,
         id_servico,
+        imagem: imagemFinal,
       },
     });
 
@@ -53,12 +60,12 @@ export async function POST(req) {
       { status: 201 }
     );
   } catch (error) {
-    console.error("Erro ao criar evento:", error);
-    return new Response(
-      JSON.stringify({ error: "Erro ao criar evento", message: error.message }),
-      { status: 500 }
-    );
-  }
+  console.error("Erro ao criar evento:", error.message || error);
+  return new Response(
+    JSON.stringify({ error: "Erro ao criar evento", message: error.message || error }),
+    { status: 500 }
+  );
+}
 }
 
 
@@ -98,6 +105,7 @@ export async function PUT(req) {
       user_author,
       id_local,
       id_servico,
+      imagem,
     } = await req.json();
 
     if (!id) {
@@ -117,6 +125,7 @@ export async function PUT(req) {
         user_author,
         id_local,
         id_servico,
+        imagem,
       },
     });
 

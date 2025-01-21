@@ -15,6 +15,7 @@ export default function EventoCadastro() {
   const [idServico, setIdServico] = useState("");
   const [user_author, setUser_author] = useState("");
   const [idLocal, setIdLocal] = useState("");
+  const [imagem, setImagem] = useState("");
 
   const [categorias, setCategorias] = useState([]);
   const [servicos, setServicos] = useState([]);
@@ -61,6 +62,7 @@ export default function EventoCadastro() {
       user_author,
       id_local: Number(idLocal),
       id_servico: Number(idServico),
+      imagem,
     };
 
     try {
@@ -203,6 +205,18 @@ export default function EventoCadastro() {
                     </option>
                   ))}
                 </select>
+            </div>
+          </div>
+
+          <div className={styles.container_info}>
+            <p>Imagem</p>
+            <div className={styles.container_text}>
+              <input
+                type="text"
+                value={imagem}
+                onChange={(e) => setImagem(e.target.value)}
+                placeholder="URL da imagem do evento (opcional)"
+              />
             </div>
           </div>
 

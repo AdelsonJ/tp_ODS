@@ -15,6 +15,7 @@ export default function CategoriesSection() {
                             width={120}
                             height={120}
                             alt={categories.alt}
+                            style={{ cursor: "pointer" }}
                         />
                         <p className="category-label">
                             {categories.name}

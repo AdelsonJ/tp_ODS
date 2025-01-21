@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./evento.module.css";
 
 interface Evento {
@@ -12,23 +13,45 @@ interface Evento {
     descricao: string;
     capacidade: string;
     duracao: string;
+    imagem: string; // Assume que a imagem é parte dos dados do evento
 }
 
 export default function EventoDataTable() {
     const [data, setData] = useState<Evento[]>([]);
-    const [searchTerm, setSearchTerm] = useState(""); 
+    const [searchTerm, setSearchTerm] = useState("");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+
+    const [categorias, setCategorias] = useState([]);
+    const [servicos, setServicos] = useState([]);
+    const [locais, setLocais] = useState([]);
+
+    const router = useRouter(); // Hook para navegação
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch('/api/evento');
+                const response = await fetch("/api/evento");
                 if (!response.ok) {
                     throw new Error(`Erro na resposta: ${response.statusText}`);
                 }
                 const result: Evento[] = await response.json();
                 setData(result);
+
+                const [categoriasRes, servicosRes, locaisRes] = await Promise.all([
+                    fetch("/api/categoria"),
+                    fetch("/api/servico"),
+                    fetch("/api/local"),
+                ]);
+
+                const categoriasData = await categoriasRes.json();
+                const servicosData = await servicosRes.json();
+                const locaisData = await locaisRes.json();
+
+                setCategorias(categoriasData);
+                setServicos(servicosData);
+                setLocais(locaisData);
+
             } catch (error) {
                 if (error instanceof Error) {
                     setError(error.message);
@@ -43,8 +66,7 @@ export default function EventoDataTable() {
         fetchData();
     }, []);
 
-    // Função para filtrar os dados com base no valor da barra de pesquisa
-    const filteredData = data.filter(item => 
+    const filteredData = data.filter((item) =>
         item.nome.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
@@ -57,11 +79,8 @@ export default function EventoDataTable() {
     }
 
     return (
-        <div className={styles.tableContainer}>
-            <h2>Lista de Eventos</h2>
-            
+        <div className={styles.container}>
             <div className={styles.containerBarraPesquisa}>
-                {/* Barra de pesquisa */}
                 <input
                     type="text"
                     placeholder="Pesquisar pelo nome"
@@ -71,36 +90,41 @@ export default function EventoDataTable() {
                 />
             </div>
 
-            <table className={styles.table}>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Local</th>
-                        <th>Descrição</th>
-                        <th>Capacidade</th>
-                        <th>Duração</th>
-                        <th>Categoria</th>
-                        <th>Serviço</th>
-                        <th>Autor</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {filteredData.map((item) => (
-                        <tr key={item.id}>
-                            <td>{item.id}</td>
-                            <td>{item.nome}</td>
-                            <td>{item.id_local}</td>
-                            <td>{item.descricao}</td>
-                            <td>{item.capacidade}</td>
-                            <td>{item.duracao}</td>
-                            <td>{item.id_categoria}</td>
-                            <td>{item.id_servico}</td>
-                            <td>{item.user_author}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <div className={styles.cardsContainer}>
+                {filteredData.map((item) => (
+                    <div
+                        key={item.id}
+                        className={styles.card}
+                        onClick={() => router.push(`/entidades/evento/pagina?id=${item.id}`)}
+                    >
+                        <img
+                            src={item.imagem} // Assume que a imagem está sendo fornecida no evento
+                            alt={item.nome}
+                            className={styles.cardImage}
+                        />
+                        <div className={styles.cardContent}>
+                            <h3>{item.nome}</h3>
+
+                            <div className={styles.cardFooter}>
+                                <div className={styles.dateBox}>
+                                    <div className={styles.dateHeader}>
+                                        {new Date(item.data).toLocaleString('pt-BR', { month: 'long' })}
+                                    </div>
+                                    <div className={styles.dateDay}>
+                                        {new Date(item.data).toLocaleString('pt-BR', { day: '2-digit' })}
+                                    </div>
+                                </div>
+
+                                <div className={styles.cardDetails}>
+                                    <div>Início: {item.hora}</div>
+                                    <div>Duração: {item.duracao} min</div>
+                                    <div>Endereço: {locais.find((l) => l.id === parseInt(item.id_local))?.nome || "Local não encontrado"}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

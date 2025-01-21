@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Carousel } from "./components/ImageCarousel";
 import CategoriesSection from "./components/CategoriesSection";
 import EmblaCarousel  from "./components/EmblaCarousel";
+import Link from "next/link";
 
 import '@/app/page-module.css'
 
@@ -28,7 +29,9 @@ export default function Home() {
 						<h3>Que tal criar seu próprio evento?</h3>
 						<h4>Chegou a sua vez!</h4>
 						<p>Crie seu evento de forma rápida e simples agora mesmo.</p>
-						<button className="event-button">Criar Evento</button>
+						<Link href="/entidades/evento/cadastro" passHref>
+							<button className="event-button">Criar Evento</button>
+						</Link>
 					</div>
 
 					<Image 

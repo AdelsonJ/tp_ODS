@@ -110,3 +110,85 @@
     background-color: lightseagreen; /* Cor do botão ao passar o mouse */
 }
 
+.cardsContainer {
+    display: flex; /* Disposição em linha */
+    flex-wrap: wrap; /* Permite que os cards quebrem para a próxima linha */
+    gap: 20px; /* Espaçamento entre os cards */
+    justify-content: space-evenly; /* Distribui os cards uniformemente */
+    padding: 20px;
+    width: 100%; /* Garante que o container ocupe toda a largura */
+    box-sizing: border-box; /* Inclui padding e border no cálculo de largura */
+}
+
+.card {
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    flex: 1 1 calc(30% - 20px); /* Cards ocupam 30% da largura com espaçamento */
+    max-width: 500px; /* Largura máxima do card */
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    border-style: solid;
+}
+
+.card:hover {
+    transform: scale(1.05); /* Animação no hover */
+}
+
+.cardImage {
+    width: 100%;
+    height: 200px; /* Altura fixa para as imagens */
+    object-fit: cover; /* Ajuste proporcional da imagem */
+}
+
+.cardContent {
+    padding: 20px;
+}
+
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+.dateBox {
+    background-color: #ffffff;
+    text-align: center;
+    width: 100px;
+}
+
+.dateHeader {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #000000;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100px;
+    height: 25px;
+}
+
+.dateDay {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000000;
+    width: 100px;
+    height: 50px;
+    border-style: solid;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-top: 4px;
+}
+
+.cardDetails {
+    font-size: 0.9rem;
+    text-align: left;
+}
+  
+

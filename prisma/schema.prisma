@@ -53,6 +53,7 @@ model Evento {
   servico           Servico   @relation(fields: [id_servico], references: [id])
   id_servico        Int
   inscricoes        Inscricao[]
+  imagem            String?
 }
 
 
