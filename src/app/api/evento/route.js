@@ -78,17 +78,23 @@ export async function DELETE(req) {
       return new Response(JSON.stringify({ error: "IDs inválidos" }), { status: 400 });
     }
 
+    // Converter os IDs para números
+    const numericIds = ids.map(id => Number(id));
+
+    console.log(numericIds); // Deve imprimir [33] como um número
+
     await prisma.evento.deleteMany({
       where: {
-        id: { in: ids },
+        id: { in: numericIds },
       },
     });
 
     return new Response(JSON.stringify({ message: "Eventos excluídos com sucesso" }), { status: 200 });
   } catch (error) {
-    return new Response(JSON.stringify({ error: "Erro ao excluir eventos", message: error.message }), { status: 500 });
+    return new Response(JSON.stringify({ error: error.message, message: error.message }), { status: 500 });
   }
 }
+
 
 // Para a rota PUT
 export async function PUT(req) {

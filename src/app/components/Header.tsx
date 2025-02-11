@@ -122,14 +122,14 @@ export default function NavBar() {
                         onClose={() => setLoginOpen(false)} 
                         setCadastroOpen={setCadastroOpen} 
                     />
-                    </div>
-                        <div>
-                        <button className="buttons" onClick={() => setCadastroOpen(true)}>Cadastre-se</button>
-                        <CadastroModal 
+                </div>
+                <div>
+                    <button className="buttons" onClick={() => setCadastroOpen(true)}>Cadastre-se</button>
+                    <CadastroModal 
                         isOpen={isCadastroOpen} 
                         onClose={() => setCadastroOpen(false)} 
                         setLoginOpen={setLoginOpen}
-                        />
+                    />
                 </div>
                 </>
             )}

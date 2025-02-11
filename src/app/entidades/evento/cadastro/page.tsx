@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useUser, UserProvider } from "../../../components/UserContext"
 import styles from "./cadastro.module.css";
 import Link from "next/link";
 
@@ -13,13 +14,14 @@ export default function EventoCadastro() {
   const [duracao, setDuracao] = useState("");
   const [idCategoria, setIdCategoria] = useState("");
   const [idServico, setIdServico] = useState("");
-  const [user_author, setUser_author] = useState("");
   const [idLocal, setIdLocal] = useState("");
   const [imagem, setImagem] = useState("");
 
   const [categorias, setCategorias] = useState([]);
   const [servicos, setServicos] = useState([]);
   const [locais, setLocais] = useState([]);
+
+  const { user, setUser } = useUser();
 
   const router = useRouter();
 
@@ -40,6 +42,7 @@ export default function EventoCadastro() {
         setCategorias(categoriasData);
         setServicos(servicosData);
         setLocais(locaisData);
+
       } catch (error) {
         console.error("Erro ao carregar dados:", error);
       }
@@ -51,6 +54,8 @@ export default function EventoCadastro() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    console.log(user)
+
     const novoEvento = {
       nome,
       data,
@@ -59,7 +64,7 @@ export default function EventoCadastro() {
       capacidade: Number(capacidade),
       duracao: Number(duracao),
       id_categoria: Number(idCategoria),
-      user_author,
+      user_author: user['username'],
       id_local: Number(idLocal),
       id_servico: Number(idServico),
       imagem,
@@ -220,18 +225,6 @@ export default function EventoCadastro() {
             </div>
           </div>
 
-          <div className={styles.container_info}>
-            <p>Usuário</p>
-            <div className={styles.container_text}>  
-              <input
-                type="text"
-                value={user_author}
-                onChange={(e) => setUser_author(e.target.value)}
-                placeholder="Nome de usuário"
-              />
-            </div>
-          </div>
-
           <div className={styles.button_container}>
             <button type="submit" className={styles.button}>
               Salvar
@@ -242,6 +235,7 @@ export default function EventoCadastro() {
               </button>
             </Link>
           </div>
+
         </form>
       </div>
     </div>
