@@ -232,13 +232,10 @@ export default function EventoDetalhes({ id }: EventoDetalhesProps) {
                     <button className={styles.button} disabled={!id}>Alterar Informações</button>
                 </Link>
                 {user['username'] === user_author ? (
-                    <p>oi</p>
-                ) : (
-                    <p>tchau</p>
-                )}
                 <Link href="/entidades/evento" passHref>
                     <button className={styles.button} onClick={handleDelete}>Deletar evento</button>
-                </Link>
+                </Link>  
+                ) : (null)}
                 <Link href="/entidades/evento" passHref>
                     <button className={styles.button}>Voltar</button>
                 </Link>

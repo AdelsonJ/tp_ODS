@@ -88,6 +88,7 @@ export async function DELETE(req) {
         id: { in: numericIds },
       },
     });
+    console.log(2)
 
     return new Response(JSON.stringify({ message: "Eventos excluídos com sucesso" }), { status: 200 });
   } catch (error) {

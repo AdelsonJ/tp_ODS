@@ -56,7 +56,6 @@ model Evento {
   imagem            String?
 }
 
-
 model Local{
   id          Int  @id @default(autoincrement())
   nome        String
@@ -67,3 +66,17 @@ model Local{
   eventos     Evento[]
 }
 
+model Servico{
+  id         Int  @id @default(autoincrement())
+  nome       String
+  categoria  String
+  descricao  String
+  eventos    Evento[]
+}
+
+model Categoria {
+  id        Int    @id @default(autoincrement())
+  nome      String
+  descricao String
+  eventos Evento[]
+}
