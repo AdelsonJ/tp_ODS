@@ -9,6 +9,7 @@ import { FaCalendarAlt } from "react-icons/fa";
 import { BiSolidDrink } from "react-icons/bi";
 import { IoMdHome } from "react-icons/io";
 import { FaTags } from "react-icons/fa";
+import { FiFileText } from "react-icons/fi";
 import "./styles/Header.css";
 import LoginModal from "../entidades/login/loginModal";
 import CadastroModal from "../entidades/cadastro/cadastroModal";
@@ -74,6 +75,14 @@ export default function NavBar() {
                     Categorias
                 </button>
             </Link>
+            {user?.tipo === "admin" ? (
+                <Link href="/relatorio">
+                    <button>
+                        <FiFileText className="menu-icon" />
+                        Relatório
+                    </button>
+                </Link>
+            ) : null}
             {/* <Link href="/dashboard">
                 <button>
                 <IoMdHome className="menu-icon" />

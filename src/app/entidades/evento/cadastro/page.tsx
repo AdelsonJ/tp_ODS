@@ -25,6 +25,19 @@ export default function EventoCadastro() {
 
   const router = useRouter();
 
+  const imagens = [
+    "/eventos/anonovo.jpg",
+    "/eventos/casamento.jpg",
+    "/eventos/churrasco.jpg",
+    "/eventos/festainfantil.jpg",
+    "/eventos/halloween.jpg",
+    "/eventos/noitedefilmes.jpg",
+    "/eventos/quinzeanos.jpg",
+    "/eventos/show.jpg",
+    "/eventos/restaurante.jpg",
+    "/eventos/lanchonete.jpg",
+  ];
+
   useEffect(() => {
     // Carregar categorias, serviços e locais ao montar o componente
     const fetchData = async () => {
@@ -214,16 +227,24 @@ export default function EventoCadastro() {
           </div>
 
           <div className={styles.container_info}>
-            <p>Imagem</p>
-            <div className={styles.container_text}>
-              <input
-                type="text"
-                value={imagem}
-                onChange={(e) => setImagem(e.target.value)}
-                placeholder="URL da imagem do evento (opcional)"
-              />
-            </div>
+              <p>Imagem</p>
+              <div className={styles.container_text}>
+                <select value={imagem} onChange={(e) => setImagem(e.target.value)}>
+                  <option value="">Selecione uma imagem</option>
+                  {imagens.map((img, index) => (
+                    <option key={index} value={img}>
+                      {img.split("/").pop()} {/* Exibe apenas o nome do arquivo */}
+                    </option>
+                  ))}
+                </select>
+              </div>
           </div>
+          {imagem && (
+            <div className={styles.preview}>
+              <p>Prévia da Imagem</p>
+              <img src={imagem} alt="Prévia" className={styles.full_image}/>
+            </div>
+          )}
 
           <div className={styles.button_container}>
             <button type="submit" className={styles.button}>

@@ -10,53 +10,50 @@ export const authOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: { label: 'Email', type: 'text' },
+        identifier: { label: 'Email ou Nome de Usuário', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        const { email, password } = credentials || {};
+        const { identifier, password } = credentials || {};
 
-        if (!email || !password) {
-          return null; // Credenciais faltando
+        if (!identifier || !password) {
+          return null;
         }
 
-        // Consultar o banco de dados para encontrar o usuário
+        // Verificar se é e-mail ou nome de usuário
+        const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(identifier);
+
+        console.log("SUPOSTO EMAIL OU USERNAME: ",isEmail);
         const usuario = await prisma.usuario.findUnique({
-          where: {
-            email: email,
-          },
+          where: isEmail
+            ? { email: identifier }
+            : { username: identifier },
         });
 
-        // Se o usuário não for encontrado, retorna null
         if (!usuario) {
           return null;
         }
 
-        // Verificar a senha usando bcrypt
+        // Verificar a senha com bcrypt
         const isPasswordValid = await bcrypt.compare(password, usuario.senha);
 
-        // Se a senha for inválida, retorna null
         if (!isPasswordValid) {
-            return null;
+          return null;
         }
 
-
-        // Se o usuário for autenticado com sucesso, retorna os dados do usuário
-        console.log('Usuário autenticado com sucesso:', usuario);
-        return { 
-            username: usuario.username, 
-            nome: usuario.nome, 
-            email: usuario.email,
-            data_nasc: usuario.data_nasc, 
-            senha: usuario.senha,
-            tipo: usuario.tipo,
-            idade: usuario.idade 
+        return {
+          id: usuario.id,
+          username: usuario.username,
+          nome: usuario.nome,
+          email: usuario.email,
+          data_nasc: usuario.data_nasc,
+          tipo: usuario.tipo,
+          idade: usuario.idade,
         };
       },
     }),
   ],
   callbacks: {
-    // Adicionar informações personalizadas ao token JWT
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
@@ -69,8 +66,7 @@ export const authOptions = {
       }
       return token;
     },
-  
-    // Adicionar informações do token JWT à sessão
+
     async session({ session, token }) {
       session.user = {
         id: token.id,
@@ -84,9 +80,8 @@ export const authOptions = {
       return session;
     },
   },
-  
 };
 
 const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST }; // Suporte para GET e POST.
+export { handler as GET, handler as POST };

@@ -4,7 +4,11 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Carousel } from "./components/ImageCarousel";
 import CategoriesSection from "./components/CategoriesSection";
+import CategoriesCarousel from "./components/CategoriesCarousel";
 import EmblaCarousel  from "./components/EmblaCarousel";
+import EmblaCarouselDate from "./components/EmblaCarouselDate";
+import EmblaCarouselNovidade  from "./components/EmblaCarouselNovidade";
+import EmblaCarouselDestaque from "./components/EmblaCarouselDestaque";
 import Link from "next/link";
 import { useUser } from "./components/UserContext"; 
 import LoginModal from "./entidades/login/loginModal";
@@ -27,11 +31,11 @@ export default function Home() {
 		<>			
 			<Carousel />
 			
-			<CategoriesSection />
+			<CategoriesCarousel title="Categorias" options={{ loop: true }} />
 
-			<EmblaCarousel slides={SLIDES} options={OPTIONS} title="Eventos em destaque"/>
-			<EmblaCarousel slides={SLIDES} options={OPTIONS} title="Novidades"/>
-			<EmblaCarousel slides={SLIDES} options={OPTIONS} title="Eventos próximos"/>
+			<EmblaCarouselDestaque slides={SLIDES} options={OPTIONS} title="Eventos em destaque"/>
+			<EmblaCarouselNovidade slides={SLIDES} options={OPTIONS} title="Novidades"/>
+			<EmblaCarouselDate slides={SLIDES} options={OPTIONS} title="Eventos próximos"/>
 
 			<div className="container">
 				<div className="create-event-section">

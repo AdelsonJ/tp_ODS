@@ -8,7 +8,7 @@ const DEFAULT_IMAGE = "/uploads/foto4.png";
 // Para a rota GET
 export async function GET(req) {
   try {
-    const eventos = await prisma.evento.findMany();
+    const eventos = await prisma.evento.findMany({include: { inscricoes: true }});
     return new Response(JSON.stringify(eventos), { status: 200 });
   } catch (error) {
     return new Response(JSON.stringify({ error: 'Erro ao buscar eventos' }), { status: 500 });

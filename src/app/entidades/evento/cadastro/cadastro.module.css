@@ -180,3 +180,19 @@
     max-height: 100%;
     object-fit: cover; /* Ajusta a imagem para preencher o contêiner */
 }
+
+.image_preview {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Adiciona um espaço entre os inputs e a imagem */
+}
+  
+.full_image {
+    max-width: 100%; /* Garante que a imagem não ultrapasse a largura do container */
+    max-height: 400px; /* Define um limite para altura, ajuste conforme necessário */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra para destacar */
+    object-fit: contain; /* Mantém a proporção da imagem sem cortes */
+}
+  

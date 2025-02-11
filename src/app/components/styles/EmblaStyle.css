@@ -147,3 +147,22 @@
 .embla__dot--selected:after {
     box-shadow: inset 0 0 0 0.2rem var(--text-body);
 } */
+
+.embla__container_categoria {
+    display: flex;
+    gap: 16px; /* Espaço entre os itens */
+}
+
+.embla__slide_categoria {
+    flex: 0 0 100%; /* Padrão: um por vez */
+}
+
+.embla__slide_categoria--multi {
+    flex: 0 0 calc(100% / 8); /* Divide a largura para exibir 6 itens */
+    text-align: center;
+}
+
+.embla__viewport_categoria {
+    overflow: hidden;
+}
+  

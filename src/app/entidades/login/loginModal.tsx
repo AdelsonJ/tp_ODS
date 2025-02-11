@@ -26,15 +26,15 @@ export default function LoginModal({ isOpen, onClose, setCadastroOpen }: LoginMo
     onClose();
   };
 
-  const handleLogin = async (e: { preventDefault: () => void }) => {
+  const handleLogin = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-
+  
     const result = await signIn("credentials", {
       redirect: false,
-      email,
+      identifier: email, // Nome de usuário ou e-mail
       password,
     });
-
+  
     if (result?.error) {
       setError(result.error);
     } else {

@@ -9,7 +9,7 @@ export default function ProfilePage() {
     const { user, setUser } = useUser();
     const [nome, setNome] = useState(user?.nome || "");
     const [email, setEmail] = useState(user?.email || "");
-    const [dataNasc, setDataNasc] = useState(user?.dataNasc ? new Date(user.dataNasc).toISOString().split('T')[0] : "");
+    const [data_nasc, setDataNasc] = useState(user?.data_nasc ? new Date(user.data_nasc).toISOString().split('T')[0] : "");
 
     const [username, setUsername] = useState(user?.username || "");
 
@@ -17,7 +17,7 @@ export default function ProfilePage() {
         if (user) {
             setNome(user.nome || "");
             setEmail(user.email || "");
-            setDataNasc(user.dataNasc ? new Date(user.dataNasc).toISOString().split('T')[0] : "");
+            setDataNasc(user.data_nasc ? new Date(user.data_nasc).toISOString().split('T')[0] : "");
             setUsername(user.username || "");
         }
     }, [user]);
@@ -34,7 +34,7 @@ export default function ProfilePage() {
             username: user.username,
             nome,
             email,
-            dataNasc,
+            data_nasc,
         };
 
         try {
@@ -81,9 +81,9 @@ export default function ProfilePage() {
                 <InputField
                     label="Data de Nascimento"
                     type="date"
-                    value={dataNasc}
+                    value={data_nasc}
                     onChange={(e) => setDataNasc(e.target.value)}
-                    isFilled={dataNasc !== ""}
+                    isFilled={data_nasc !== ""}
                 />
                 <InputField
                     label="Nome de Usuário"

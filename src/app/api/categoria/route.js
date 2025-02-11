@@ -15,18 +15,22 @@ export async function GET(req) {
 // Se você também for permitir POST, deve definir aqui
 export async function POST(req) {
   try {
-    const { nome,  descricao } = await req.json();
+    const { nome,  descricao, imagem } = await req.json();
+
+    console.log(imagem)
 
     const novaCategoria = await prisma.categoria.create({
       data: {
         nome,
         descricao,
+        imagem,
       },
     });
+    console.log('uai')
 
     return new Response(JSON.stringify({ message: "Categoria criada com sucesso", categoria: novaCategoria }), { status: 201 });
   } catch (error) {
-    return new Response(JSON.stringify({ error: "Erro ao criar categoria", message: error.message }), { status: 500 });
+    return new Response(JSON.stringify({ error: error.message, message: error.message }), { status: 500 });
   }
 }
 
@@ -53,7 +57,7 @@ export async function DELETE(req) {
 export async function PUT(req) {
   try {
     // Parse a requisição para extrair os dados do corpo
-    const { id, nome, descricao } = await req.json();
+    const { id, nome, descricao, imagem } = await req.json();
 
     // Verifique se o ID foi fornecido
     if (!id) {
@@ -66,6 +70,7 @@ export async function PUT(req) {
       data: {
         nome,
         descricao,
+        imagem,
       },
     });
 

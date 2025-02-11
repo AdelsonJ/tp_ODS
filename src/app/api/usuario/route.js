@@ -7,7 +7,17 @@ const prisma = new PrismaClient();
 // Para a rota GET
 export async function GET(req) {
   try {
-    const usuarios = await prisma.usuario.findMany();
+    const usuarios = await prisma.usuario.findMany({
+      include: {
+        eventos: true, // Eventos que o usuário criou
+        inscricoes: {
+          include: {
+            evento: true // Eventos nos quais o usuário está inscrito
+          }
+        }
+      }
+    });
+    
     return new Response(JSON.stringify(usuarios), { status: 200 });
   } catch (error) {
     return new Response(JSON.stringify({ error: 'Erro ao buscar usuarios' }), { status: 500 });
@@ -137,4 +147,3 @@ export async function PUT(req) {
     );
   }
 }
-

@@ -78,5 +78,6 @@ model Categoria {
   id        Int    @id @default(autoincrement())
   nome      String
   descricao String
-  eventos Evento[]
+  eventos   Evento[]
+  imagem    String
 }

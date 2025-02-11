@@ -7,11 +7,25 @@ import Link from "next/link";
 export default function AtualizarForm() {
     const [nome, setNome] = useState("");
     const [descricao, setDescricao] = useState("");
+    const [imagem, setImagem] = useState("");
     const [loading, setLoading] = useState(true);
 
     const router = useRouter();
     const searchParams = useSearchParams();
     const id = searchParams.get("id")
+
+    const imagens = [
+        "/categories/anonovo.png",
+        "/categories/bodas.png",
+        "/categories/casamento.png",
+        "/categories/churrasco.png",
+        "/categories/festainfantil.png",
+        "/categories/halloween.png",
+        "/categories/noitedefilmes.png",
+        "/categories/quinzeanos.png",
+        "/categories/show.png",
+    ]
+
 
     useEffect(() => {
         if (!id) {
@@ -39,6 +53,7 @@ export default function AtualizarForm() {
                 // Preenche os campos com os dados da categoria encontrada
                 setNome(categoria.nome);
                 setDescricao(categoria.descricao);
+                setImagem(categoria.imagem)
             } catch (error) {
                 console.error("Erro ao carregar a categoria:", error);
                 alert("Erro ao carregar a categoria");
@@ -57,6 +72,7 @@ export default function AtualizarForm() {
             id: Number(id),
             nome,
             descricao,
+            imagem,
         };
 
         try {
@@ -116,6 +132,27 @@ export default function AtualizarForm() {
                             />
                         </div>
                     </div>
+
+                    <div className={styles.container_info}>
+                        <p>Imagem</p>
+                        <div className={styles.container_text}>
+                            <select value={imagem} onChange={(e) => setImagem(e.target.value)}>
+                            <option value="">Selecione uma imagem</option>
+                            {imagens.map((img, index) => (
+                                <option key={index} value={img}>
+                                {img.split("/").pop()} {/* Exibe apenas o nome do arquivo */}
+                                </option>
+                            ))}
+                            </select>
+                        </div>
+                    </div>
+                    {imagem && (
+                        <div className={styles.preview}>
+                        <p>Prévia da Imagem</p>
+                        <img src={imagem} alt="Prévia" className={styles.full_image}/>
+                        </div>
+                    )}
+
                     <div className={styles.button_container}>
                         <button type="submit" className={styles.button}>Salvar</button>
                         <Link href="/entidades/categoria">

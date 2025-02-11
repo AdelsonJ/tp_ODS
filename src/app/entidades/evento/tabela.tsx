@@ -1,7 +1,8 @@
 "use client";
-
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useUser } from "../../components/UserContext";
 import styles from "./evento.module.css";
 
 interface Evento {
@@ -26,7 +27,10 @@ export default function EventoDataTable() {
     const [servicos, setServicos] = useState([]);
     const [locais, setLocais] = useState([]);
 
+    const { user, setUser } = useUser()
     const router = useRouter(); // Hook para navegação
+    const searchParams = useSearchParams();
+    const categoriaId = searchParams.get("categoria"); 
 
     useEffect(() => {
         async function fetchData() {
@@ -66,9 +70,13 @@ export default function EventoDataTable() {
         fetchData();
     }, []);
 
-    const filteredData = data.filter((item) =>
-        item.nome.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredData = data.filter((item) => {
+        // Filtro por nome e categoria
+        const matchesSearchTerm = item.nome.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesCategoria = categoriaId ? item.id_categoria.toString() === categoriaId : true;
+    
+        return matchesSearchTerm && matchesCategoria;
+    });
 
     if (loading) {
         return <p>Carregando...</p>;
@@ -124,6 +132,13 @@ export default function EventoDataTable() {
                         </div>
                     </div>
                 ))}
+                {user ? (
+                    <div className={styles.button_container}>
+                    <Link href="/entidades/evento/cadastro" passHref>
+                        <button className={styles.button}>Criar Evento</button>
+                    </Link>
+                    </div>
+                ) : (null)}
             </div>
         </div>
     );

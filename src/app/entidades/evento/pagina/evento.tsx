@@ -186,17 +186,18 @@ export default function EventoDetalhes({ id }: EventoDetalhesProps) {
                 </div>
                 
                 <div className={styles.eventDetails}>
-                {!inscricoes.find((inscricao) => 
-                    inscricao.id_evento === parseInt(id) && 
-                    inscricao.user_author === user['username']
+                {!user ? (
+                <h3>Você precisa estar logado para se inscrever no evento.</h3> // Caso o usuário não esteja logado
+                ) : !inscricoes.find(
+                    (inscricao) => inscricao.id_evento === parseInt(id) && inscricao.user_author === user['username']
                 ) ? (
-                    <button className={styles.inscricaoButton} onClick={handleInscricao}>Se inscreva</button>
-                ) : 
-                    <>
-                    <h3>Você ja está inscrito nesse evento!</h3>
+                <button className={styles.inscricaoButton} onClick={handleInscricao}>Se inscreva</button> // Caso o usuário não esteja inscrito
+                ) : (
+                <>
+                    <h3>Você já está inscrito nesse evento!</h3> {/* Caso o usuário já esteja inscrito */}
                     <button className={styles.cancelarButton} onClick={handleDeleteInscricao}>Cancelar inscrição</button>
-                    </>
-                }
+                </>
+                )}
                     <div className={styles.frame}>
                         <div><strong>Data:</strong> {data}</div>
                         <div><strong>Hora:</strong> {hora}</div>
@@ -226,20 +227,30 @@ export default function EventoDetalhes({ id }: EventoDetalhesProps) {
             <div className={styles.paragraph}>
                 <p>{categorias.find((c) => c.id === parseInt(idCategoria))?.nome || "Categoria não encontrado"}</p>
             </div>
+            
+            
+            {user && user['username'] === user_author ? (
+                <div className={styles.button_container}>
+                    <Link href={`/entidades/evento/atualizar?view=atualizar&id=${id}`} passHref>
+                        <button className={styles.button} disabled={!id}>Alterar Informações</button>
+                    </Link>
+                    <Link href="/entidades/evento" passHref>
+                        <button className={styles.button} onClick={handleDelete}>Deletar evento</button>
+                    </Link>
+                    <Link href="/entidades/evento" passHref>
+                        <button className={styles.button}>Voltar</button>
+                    </Link>
+                </div>  
+            ) : (
+                <div className={styles.button_container}>
+                    <Link href="/entidades/evento" passHref>
+                        <button className={styles.button}>Voltar</button>
+                    </Link>
+                </div>
+            )}
 
-            <div className={styles.button_container}>
-                <Link href={`/entidades/evento/atualizar?view=atualizar&id=${id}`} passHref>
-                    <button className={styles.button} disabled={!id}>Alterar Informações</button>
-                </Link>
-                {user['username'] === user_author ? (
-                <Link href="/entidades/evento" passHref>
-                    <button className={styles.button} onClick={handleDelete}>Deletar evento</button>
-                </Link>  
-                ) : (null)}
-                <Link href="/entidades/evento" passHref>
-                    <button className={styles.button}>Voltar</button>
-                </Link>
-            </div>
+
+                   
         </div>
     );
 }

@@ -8,9 +8,22 @@ export default function CategoriaCadastro() {
     // Estados para armazenar os dados do formulário
     const [nome, setNome] = useState("");
     const [descricao, setDescricao] = useState("");
+    const [imagem, setImagem] = useState("");
 
     // Inicializa o useRouter
     const router = useRouter();
+
+    const imagens = [
+        "/categories/anonovo.png",
+        "/categories/bodas.png",
+        "/categories/casamento.png",
+        "/categories/churrasco.png",
+        "/categories/festainfatil.png",
+        "/categories/halloween.png",
+        "/categories/noitedefilmes.png",
+        "/categories/quinzeanos.png",
+        "/categories/show.png",
+    ]
 
     // Função para lidar com o envio do formulário
     const handleSubmit = async (e: { preventDefault: () => void}) => {
@@ -19,6 +32,7 @@ export default function CategoriaCadastro() {
         const novaCategoria = {
             nome: nome,
             descricao: descricao,
+            imagem: imagem,
         };
 
         try {
@@ -76,6 +90,26 @@ export default function CategoriaCadastro() {
                         />
                         </div>
                     </div>
+
+                    <div className={styles.container_info}>
+                        <p>Imagem</p>
+                        <div className={styles.container_text}>
+                            <select value={imagem} onChange={(e) => setImagem(e.target.value)}>
+                            <option value="">Selecione uma imagem</option>
+                            {imagens.map((img, index) => (
+                                <option key={index} value={img}>
+                                {img.split("/").pop()} {/* Exibe apenas o nome do arquivo */}
+                                </option>
+                            ))}
+                            </select>
+                        </div>
+                    </div>
+                    {imagem && (
+                        <div className={styles.preview}>
+                        <p>Prévia da Imagem</p>
+                        <img src={imagem} alt="Prévia" className={styles.full_image}/>
+                        </div>
+                    )}
                 </form>
             </div>
             <div className={styles.button_container}>
