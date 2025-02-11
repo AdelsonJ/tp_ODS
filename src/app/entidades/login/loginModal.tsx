@@ -95,9 +95,6 @@ export default function LoginModal({ isOpen, onClose, setCadastroOpen }: LoginMo
                   Entrar
                 </button>
               </div>
-              <div className={styles.container_button}>
-                Esqueceu sua senha? Clique aqui
-              </div>
             </form>
 
             <div className={styles.container_footer}>

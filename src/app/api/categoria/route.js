@@ -2,7 +2,6 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-// Para a rota GET
 export async function GET(req) {
   try {
     const categorias = await prisma.categoria.findMany();
@@ -12,7 +11,6 @@ export async function GET(req) {
   }
 }
 
-// Se você também for permitir POST, deve definir aqui
 export async function POST(req) {
   try {
     const { nome,  descricao, imagem } = await req.json();
@@ -56,15 +54,12 @@ export async function DELETE(req) {
 
 export async function PUT(req) {
   try {
-    // Parse a requisição para extrair os dados do corpo
     const { id, nome, descricao, imagem } = await req.json();
 
-    // Verifique se o ID foi fornecido
     if (!id) {
       return new Response(JSON.stringify({ error: "ID é obrigatório" }), { status: 400 });
     }
 
-    // Atualize o registro no banco de dados
     const categoriaAtualizado = await prisma.categoria.update({
       where: { id },
       data: {

@@ -39,9 +39,8 @@ export default function DataTable(){
         fetchData();
     }, []);
 
-    // Função para lidar com a seleção de um checkbox
     const handleSelect = (id: number) => {
-        setSelectedId((prevSelectedId) => (prevSelectedId === id ? null : id)); // Alterna entre selecionar e deselecionar
+        setSelectedId((prevSelectedId) => (prevSelectedId === id ? null : id)); 
     };
 
     if (loading) {
@@ -69,8 +68,8 @@ export default function DataTable(){
                         <tr key={item.id}>
                             <td>
                                 <input
-                                    type="radio" // Alterado para rádio
-                                    checked={selectedId === item.id} // Verifica se é o selecionado
+                                    type="radio" 
+                                    checked={selectedId === item.id} 
                                     onChange={() => handleSelect(item.id)}
                                 />
                             </td>

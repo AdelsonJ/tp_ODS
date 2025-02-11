@@ -4,15 +4,14 @@ import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
-// Para a rota GET
 export async function GET(req) {
   try {
     const usuarios = await prisma.usuario.findMany({
       include: {
-        eventos: true, // Eventos que o usuário criou
+        eventos: true,
         inscricoes: {
           include: {
-            evento: true // Eventos nos quais o usuário está inscrito
+            evento: true 
           }
         }
       }
@@ -28,7 +27,6 @@ export async function POST(req) {
   try {
     const { nome, data_nasc, email, username, senha } = await req.json();
 
-    // Verifique se todos os campos obrigatórios foram fornecidos
     if (!nome || !data_nasc || !email || !username || !senha) {
       return new Response(
         JSON.stringify({ error: "Todos os campos são obrigatórios." }),
@@ -36,21 +34,18 @@ export async function POST(req) {
       );
     }
 
-    // Calcular a idade com base na data de nascimento
     const idade = calcularIdade(data_nasc);
 
-    // Criar o hash da senha usando bcrypt
     const salt = bcrypt.genSaltSync(10); 
     const hashedPassword = bcrypt.hashSync(senha, salt); 
 
-    // Criar o usuário no banco de dados com a senha criptografada
     const novoUsuario = await prisma.usuario.create({
       data: {
         nome,
         data_nasc,
         email,
         username,
-        senha: hashedPassword, // Armazena a senha criptografada
+        senha: hashedPassword, 
         tipo: "comum",
         idade,
       },
@@ -67,8 +62,7 @@ export async function POST(req) {
     );
   }
 }
-  
-// Função para calcular a idade com base na data de nascimento
+
 function calcularIdade(dataNasc) {
     const hoje = new Date();
     const nascimento = new Date(dataNasc);
@@ -77,7 +71,6 @@ function calcularIdade(dataNasc) {
     const mesAtual = hoje.getMonth();
     const mesNascimento = nascimento.getMonth();
 
-    // Se o mês de nascimento ainda não passou neste ano, subtrai 1 da idade
     if (mesAtual < mesNascimento || (mesAtual === mesNascimento && hoje.getDate() < nascimento.getDate())) {
         idade--;
     }
@@ -109,7 +102,6 @@ export async function PUT(req) {
   try {
     const { nome, data_nasc, email, username, senha } = await req.json();
 
-    // Verifique se o ID foi fornecido
     if (!username) {
       return new Response(
         JSON.stringify({ error: "Usuario é obrigatório" }),
@@ -117,14 +109,12 @@ export async function PUT(req) {
       );
     }
 
-    // Se a senha for fornecida, cria um novo hash
     let hashedPassword = undefined;
     if (senha) {
       const salt = bcrypt.genSaltSync(10);
-      hashedPassword = bcrypt.hashSync(senha, salt); // Gera o hash da nova senha
+      hashedPassword = bcrypt.hashSync(senha, salt); 
     }
 
-    // Atualize o registro no banco de dados
     const usuarioAtualizado = await prisma.usuario.update({
       where: { username },
       data: {
@@ -132,7 +122,7 @@ export async function PUT(req) {
         data_nasc,
         email,
         username,
-        senha: hashedPassword ? hashedPassword : undefined, // Se a senha não for fornecida, não atualiza
+        senha: hashedPassword ? hashedPassword : undefined, 
       },
     });
 

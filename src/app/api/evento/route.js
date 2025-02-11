@@ -5,7 +5,6 @@ const prisma = new PrismaClient();
 const DEFAULT_IMAGE = "/uploads/foto4.png";
 
 
-// Para a rota GET
 export async function GET(req) {
   try {
     const eventos = await prisma.evento.findMany({include: { inscricoes: true }});
@@ -15,7 +14,6 @@ export async function GET(req) {
   }
 }
 
-// Para a rota POST
 export async function POST(req) {
   try {
     const {
@@ -32,7 +30,6 @@ export async function POST(req) {
       imagem,
     } = await req.json();
 
-    // Verifique se todos os dados necessários foram fornecidos
     if (!nome || !data || !hora || !descricao || !capacidade || !duracao || !id_categoria || !user_author || !id_local || !id_servico) {
       return new Response(JSON.stringify({ error: "Preencha todos os campos obrigatórios" }), { status: 400 });
     }
@@ -69,7 +66,6 @@ export async function POST(req) {
 }
 
 
-// Para a rota DELETE
 export async function DELETE(req) {
   try {
     const { ids } = await req.json();
@@ -78,10 +74,9 @@ export async function DELETE(req) {
       return new Response(JSON.stringify({ error: "IDs inválidos" }), { status: 400 });
     }
 
-    // Converter os IDs para números
     const numericIds = ids.map(id => Number(id));
 
-    console.log(numericIds); // Deve imprimir [33] como um número
+    console.log(numericIds);
 
     await prisma.evento.deleteMany({
       where: {
@@ -97,7 +92,6 @@ export async function DELETE(req) {
 }
 
 
-// Para a rota PUT
 export async function PUT(req) {
   try {
     const {

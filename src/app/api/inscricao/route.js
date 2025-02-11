@@ -14,7 +14,6 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: "Dados inválidos" }), { status: 400 });
     }
 
-    // Verifica se o usuário já está inscrito no evento
     const inscricaoExistente = await prisma.inscricao.findFirst({
       where: { user_author, id_evento: eventoId },
     });
@@ -23,13 +22,12 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: "Usuário já inscrito" }), { status: 400 });
     }
 
-    // Cria a inscrição
     const novaInscricao = await prisma.inscricao.create({
       data: {
         user_author,
         id_evento: eventoId,
-        data: new Date().toISOString().split("T")[0], // Apenas a data (YYYY-MM-DD)
-        hora: new Date().toLocaleTimeString(), // Hora local
+        data: new Date().toISOString().split("T")[0], 
+        hora: new Date().toLocaleTimeString(), 
       },
     });
 

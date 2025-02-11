@@ -34,7 +34,6 @@ export const authOptions = {
           return null;
         }
 
-        // Verificar a senha com bcrypt
         const isPasswordValid = await bcrypt.compare(password, usuario.senha);
 
         if (!isPasswordValid) {

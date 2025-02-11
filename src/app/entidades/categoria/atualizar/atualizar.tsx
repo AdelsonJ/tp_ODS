@@ -140,7 +140,7 @@ export default function AtualizarForm() {
                             <option value="">Selecione uma imagem</option>
                             {imagens.map((img, index) => (
                                 <option key={index} value={img}>
-                                {img.split("/").pop()} {/* Exibe apenas o nome do arquivo */}
+                                {img.split("/").pop()} 
                                 </option>
                             ))}
                             </select>

@@ -91,10 +91,6 @@ export default function NavBar() {
             </Link> */}
             </div>
 
-            <div>
-            <input type="text" placeholder="pesquisar eventos, locais ou serviços" className="search-bar" />
-            </div>
-
             <div className="logo-img">
                 <Link href="/">
 
@@ -105,10 +101,6 @@ export default function NavBar() {
                         alt="Logo do site"
                     />
                 </Link>
-            </div>
-
-            <div className="search-bar-locals">
-            <input type="text" placeholder="Qualquer lugar" />
             </div>
 
             <div className="container_buttons">
